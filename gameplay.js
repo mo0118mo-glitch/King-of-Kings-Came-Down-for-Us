@@ -135,6 +135,8 @@ function startGame() {
         document.body.className = 'obyeongieo-bg';
     } else if (songId === 'walkonwater') {
         document.body.className = 'walkonwater-bg';
+    } else if (songId === 'prayer') {
+        document.body.className = 'prayer-bg';
     } else {
         document.body.className = ''; // Default background
     }
@@ -144,7 +146,7 @@ function startGame() {
     let currentAudio = null;
     if (songId === 'obyeongieo') {
         currentAudio = gameAudio;
-    } else if (songId === 'miracle' || songId === 'walkonwater') {
+    } else if (songId === 'miracle' || songId === 'walkonwater' || songId === 'prayer') {
         currentAudio = gameAudioMiracle;
     }
 

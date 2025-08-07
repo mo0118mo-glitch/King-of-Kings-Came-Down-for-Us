@@ -24,7 +24,8 @@ body {
 
 /* Show the scene when its ID matches the body's class */
 body.obyeongieo-bg #background-obyeongieo,
-body.walkonwater-bg #background-walkonwater {
+body.walkonwater-bg #background-walkonwater,
+body.prayer-bg #background-prayer {
     display: block; /* Show the correct scene */
 }
 

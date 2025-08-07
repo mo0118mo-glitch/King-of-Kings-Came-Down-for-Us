@@ -30,8 +30,14 @@
                 <button id="walkonwater-hard" onclick="location.href='play.html?song=walkonwater&difficulty=hard'">Hard</button>
             </div>
         </div>
-        <div id="song-prayer" class="song-select locked">
-            <h2><span class="lock-icon">🔒</span> <span data-translate-key="song_prayer">예수님의 기도</span></h2>
+        <div id="song-prayer" class="song-select">
+            <h2 data-translate-key="song_prayer">예수님의 기도</h2>
+            <div class="difficulty">
+                <span data-translate-key="difficulty">난이도 설정:</span>
+                <button id="prayer-easy" onclick="location.href='play.html?song=prayer&difficulty=easy'">Easy</button>
+                <button id="prayer-normal" onclick="location.href='play.html?song=prayer&difficulty=normal'">Normal</button>
+                <button id="prayer-hard" onclick="location.href='play.html?song=prayer&difficulty=hard'">Hard</button>
+            </div>
         </div>
         <div id="song-wip" class="song-select locked">
             <h2 data-translate-key="wip_title">개발중</h2>
