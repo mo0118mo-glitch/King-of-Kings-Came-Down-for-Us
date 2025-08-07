@@ -130,12 +130,17 @@ function startGame() {
         });
     }
 
-    // Show background for obyeongieo song
+    // Show background based on song
     const obyeongieoBg = document.getElementById('background-obyeongieo');
+    const walkonwaterBg = document.getElementById('background-walkonwater');
+
+    if (obyeongieoBg) obyeongieoBg.classList.add('hidden');
+    if (walkonwaterBg) walkonwaterBg.classList.add('hidden');
+
     if (songId === 'obyeongieo' && obyeongieoBg) {
         obyeongieoBg.classList.remove('hidden');
-    } else if (obyeongieoBg) {
-        obyeongieoBg.classList.add('hidden');
+    } else if (songId === 'walkonwater' && walkonwaterBg) {
+        walkonwaterBg.classList.remove('hidden');
     }
 
     // Show start overlay and wait for user interaction
@@ -143,7 +148,7 @@ function startGame() {
     let currentAudio = null;
     if (songId === 'obyeongieo') {
         currentAudio = gameAudio;
-    } else if (songId === 'miracle') {
+    } else if (songId === 'miracle' || songId === 'walkonwater') {
         currentAudio = gameAudioMiracle;
     }
 

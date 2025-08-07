@@ -323,5 +323,10 @@ const songs = {
             { time: 11000, key: 1, duration: 1000 }, { time: 12250, key: 2 }, { time: 12375, key: 3 },
             { time: 12500, key: 0 }, { time: 12625, key: 1 }, { time: 13000, key: 2 }, { time: 13000, key: 3, duration: 1000 }
         ]
+    },
+    "walkonwater": {
+        "easy": [],
+        "normal": [],
+        "hard": []
     }
 };
