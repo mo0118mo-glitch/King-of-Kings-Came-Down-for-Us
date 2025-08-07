@@ -432,7 +432,6 @@ function draw() {
     let equippedSkin;
     try {
         equippedSkin = JSON.parse(localStorage.getItem('equippedSkin'));
-        // Handle cases where old string value might be present
         if (typeof equippedSkin === 'string') {
             equippedSkin = { color: equippedSkin, shape: 'arrow' };
         } else if (!equippedSkin || !equippedSkin.color) {
@@ -442,7 +441,7 @@ function draw() {
         equippedSkin = { color: 'cyan', shape: 'arrow' };
     }
 
-    // Draw judgment line arrows (fixed, not affected by skin)
+    // Draw judgment line arrows
     for (let i = 0; i < keyCount; i++) {
         let isHoldingLongNote = false;
         // Check if there's an active long note being held on this key
@@ -459,31 +458,27 @@ function draw() {
         drawNoteShape(keyPositions[i], judgmentLineY, rotation, color, equippedSkin.shape);
     }
 
+    // Draw notes
     for (const note of notes) {
         if (note.y > -noteSize && note.y < canvas.height + noteSize) {
             const rotation = [-90, 180, 0, 90][note.key];
             if (note.isLongNote) {
-                const longNoteColor = getComplementaryColor(equippedSkin.color); // 보색 적용
+                const longNoteColor = getComplementaryColor(equippedSkin.color);
                 const length = (note.duration / travelTime) * judgmentLineY;
                 let tailY = note.y - length;
 
-                // If the long note is hit, its head stays at the judgment line
-                // and the tail shrinks over time.
                 if (note.hit) {
                     const currentTime = Date.now() - startTime;
                     const timePassed = currentTime - note.time;
                     const progress = Math.max(0, timePassed / note.duration);
-                    
                     const currentLength = length * (1 - progress);
                     tailY = judgmentLineY - currentLength;
                 }
 
                 ctx.fillStyle = longNoteColor;
-                // Only draw the part of the tail that is above the judgment line
                 if (tailY < judgmentLineY) {
                     ctx.fillRect(note.x - noteSize / 4, tailY, noteSize / 2, judgmentLineY - tailY);
                 }
-                // Draw the head
                 drawNoteShape(note.x, note.y, rotation, longNoteColor, equippedSkin.shape);
             } else {
                 drawNoteShape(note.x, note.y, rotation, equippedSkin.color, equippedSkin.shape);
@@ -491,6 +486,7 @@ function draw() {
         }
     }
 
+    // Draw judgment text
     if (judgmentTextAlpha > 0) {
         ctx.font = 'bold 48px sans-serif';
         ctx.fillStyle = `rgba(255, 255, 255, ${judgmentTextAlpha})`;

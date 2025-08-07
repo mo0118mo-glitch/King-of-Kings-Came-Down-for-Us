@@ -319,22 +319,26 @@ button {
     background-color: transparent; /* Make canvas background transparent */
 }
 
-/* Styles for Walk on Water Background */
-#background-walkonwater {
+/* Styles for image-based backgrounds */
+#background-walkonwater, #background-prayer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1; /* Place it behind the game canvas */
+  z-index: -1; /* Ensure it's behind the canvas but visible */
 }
 
-#background-walkonwater .hero-image {
+#background-walkonwater .hero-image,
+#background-prayer .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+#background-walkonwater .hero-image {
   filter: brightness(0.95) contrast(1.05);
 }
 
