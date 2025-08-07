@@ -131,22 +131,22 @@ function startGame() {
     }
 
     // Show background based on song
-    const obyeongieoBg = document.getElementById('background-obyeongieo');
-    const walkonwaterBg = document.getElementById('background-walkonwater');
-    const prayerBg = document.getElementById('background-prayer');
+    const backgrounds = document.querySelectorAll('.scene');
+    backgrounds.forEach(bg => bg.classList.remove('active')); // Hide all backgrounds
 
-    // Hide all backgrounds first
-    if (obyeongieoBg) obyeongieoBg.classList.add('hidden');
-    if (walkonwaterBg) walkonwaterBg.classList.add('hidden');
-    if (prayerBg) prayerBg.classList.add('hidden');
+    const currentBg = document.getElementById(`background-${songId}`);
+    if (currentBg) {
+        currentBg.classList.add('active'); // Show the correct one
+    }
 
-    // Show the correct background
-    if (songId === 'obyeongieo' && obyeongieoBg) {
-        obyeongieoBg.classList.remove('hidden');
-    } else if (songId === 'walkonwater' && walkonwaterBg) {
-        walkonwaterBg.classList.remove('hidden');
-    } else if (songId === 'prayer' && prayerBg) {
-        prayerBg.classList.remove('hidden');
+    // Special handling for obyeongieo elements which are inside the scene div
+    const obyeongieoElements = document.querySelector('#background-obyeongieo');
+    if (songId === 'obyeongieo' && obyeongieoElements) {
+        // This logic is now handled by CSS, but we ensure the main container is active
+    } else if (songId === 'walkonwater') {
+        // The 'active' class handles this now
+    } else if (songId === 'prayer') {
+        // The 'active' class handles this now
     }
 
     // Show start overlay and wait for user interaction

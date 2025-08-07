@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
+    background-color: #000; /* 기본 배경을 검은색으로 변경 */
     overflow: hidden;
     color: #fff;
     text-align: center;
@@ -18,10 +18,26 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
+    background-size: cover;
+    background-position: center;
+    display: none; /* 기본적으로 모든 배경 숨김 */
 }
 
-.scene.hidden {
-    display: none;
+.scene.active {
+    display: block; /* active 클래스가 있는 배경만 표시 */
+}
+
+/* 각 스테이지 배경 정의 */
+#background-obyeongieo {
+    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
+}
+
+#background-walkonwater {
+    background-image: url('jesus-walking.jpg');
+}
+
+#background-prayer {
+    background-image: url('prayer-background.jpg');
 }
 
 .hill {
