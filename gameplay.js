@@ -213,19 +213,24 @@ function update() {
         if (note.isLongNote && note.hit) {
             const endTime = note.time + note.duration;
             // Check for early release
-            if (!keysHeld[note.key] && currentTime < endTime) {
+            if (!keysHeld[note.key] && currentTime < endTime && !note.releasedEarly) {
+                note.releasedEarly = true; // Mark as released early once
                 showJudgment(JUDGMENT.BAD); // Penalty for releasing early
-                notes.splice(i, 1);
-                continue;
             }
-            // Check for successful completion
-            if (currentTime >= endTime) {
-                let playerCoins = parseInt(localStorage.getItem('playerCoins') || '0');
-                playerCoins += 5; // 롱노트 성공 코인
-                localStorage.setItem('playerCoins', playerCoins);
 
-                showJudgment(JUDGMENT.PERFECT); // Reward for holding till the end
-                notes.splice(i, 1);
+            // The note's head should stay at the judgment line
+            note.y = judgmentLineY;
+
+            // Check for successful completion or end of note
+            if (currentTime >= endTime) {
+                if (!note.releasedEarly) {
+                    let playerCoins = parseInt(localStorage.getItem('playerCoins') || '0');
+                    playerCoins += 5; // 롱노트 성공 코인
+                    localStorage.setItem('playerCoins', playerCoins);
+
+                    showJudgment(JUDGMENT.PERFECT); // Reward for holding till the end
+                }
+                notes.splice(i, 1); // Remove note after it's finished
                 continue;
             }
         }
@@ -445,10 +450,26 @@ function draw() {
             if (note.isLongNote) {
                 const longNoteColor = getComplementaryColor(equippedSkin.color); // 보색 적용
                 const length = (note.duration / travelTime) * judgmentLineY;
-                const tailY = note.y - length;
+                let tailY = note.y - length;
+
+                // If the long note is hit, its head stays at the judgment line
+                // and the tail shrinks over time.
+                if (note.hit) {
+                    const currentTime = Date.now() - startTime;
+                    const timePassed = currentTime - note.time;
+                    const progress = Math.max(0, timePassed / note.duration);
+                    
+                    const currentLength = length * (1 - progress);
+                    tailY = judgmentLineY - currentLength;
+                }
+
                 ctx.fillStyle = longNoteColor;
-                ctx.fillRect(note.x - noteSize / 4, tailY, noteSize / 2, length);
-                drawNoteShape(note.x, note.y, rotation, longNoteColor, equippedSkin.shape); // Long note head uses equipped shape and complementary color
+                // Only draw the part of the tail that is above the judgment line
+                if (tailY < judgmentLineY) {
+                    ctx.fillRect(note.x - noteSize / 4, tailY, noteSize / 2, judgmentLineY - tailY);
+                }
+                // Draw the head
+                drawNoteShape(note.x, note.y, rotation, longNoteColor, equippedSkin.shape);
             } else {
                 drawNoteShape(note.x, note.y, rotation, equippedSkin.color, equippedSkin.shape);
             }
