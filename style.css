@@ -1,23 +1,35 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
+    background-color: #000; /* Default background to black */
     overflow: hidden;
-    color: #fff; /* Keep old color */
-    text-align: center; /* Keep old text-align */
-    display: flex; /* Keep old display */
-    justify-content: center; /* Keep old justify-content */
-    align-items: center; /* Keep old align-items */
-    height: 100vh; /* Keep old height */
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* Default scene, hidden unless a specific class is on the body */
 .scene {
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Ensure it's behind the canvas */
+    z-index: -1;
+    display: none; /* Hide by default */
+}
+
+/* Show the scene when its ID matches the body's class */
+body.obyeongieo-bg #background-obyeongieo,
+body.walkonwater-bg #background-walkonwater {
+    display: block; /* Show the correct scene */
+}
+
+#background-obyeongieo {
+    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
 }
 
 .hill {
