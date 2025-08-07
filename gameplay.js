@@ -444,10 +444,19 @@ function draw() {
 
     // Draw judgment line arrows (fixed, not affected by skin)
     for (let i = 0; i < keyCount; i++) {
+        let isHoldingLongNote = false;
+        // Check if there's an active long note being held on this key
+        for (const note of notes) {
+            if (note.key === i && note.isLongNote && note.hit) {
+                isHoldingLongNote = true;
+                break;
+            }
+        }
+
         const rotation = [-90, 180, 0, 90][i];
-        const color = keysHeld[i] ? 'gold' : '#888';
-        // Use drawNoteShape for fixed arrows, but always with arrow shape
-        drawNoteShape(keyPositions[i], judgmentLineY, rotation, color, equippedSkin.shape); // Use equipped shape for judgment line
+        // The judgment line should only turn gold if a key is held AND it's not for an active long note.
+        const color = keysHeld[i] && !isHoldingLongNote ? 'gold' : '#888';
+        drawNoteShape(keyPositions[i], judgmentLineY, rotation, color, equippedSkin.shape);
     }
 
     for (const note of notes) {
