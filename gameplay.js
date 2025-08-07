@@ -130,15 +130,23 @@ function startGame() {
         });
     }
 
-    // Set body class for stage-specific backgrounds
-    if (songId === 'obyeongieo') {
-        document.body.className = 'obyeongieo-bg';
-    } else if (songId === 'walkonwater') {
-        document.body.className = 'walkonwater-bg';
-    } else if (songId === 'prayer') {
-        document.body.className = 'prayer-bg';
-    } else {
-        document.body.className = ''; // Default background
+    // Show background based on song
+    const obyeongieoBg = document.getElementById('background-obyeongieo');
+    const walkonwaterBg = document.getElementById('background-walkonwater');
+    const prayerBg = document.getElementById('background-prayer');
+
+    // Hide all backgrounds first
+    if (obyeongieoBg) obyeongieoBg.classList.add('hidden');
+    if (walkonwaterBg) walkonwaterBg.classList.add('hidden');
+    if (prayerBg) prayerBg.classList.add('hidden');
+
+    // Show the correct background
+    if (songId === 'obyeongieo' && obyeongieoBg) {
+        obyeongieoBg.classList.remove('hidden');
+    } else if (songId === 'walkonwater' && walkonwaterBg) {
+        walkonwaterBg.classList.remove('hidden');
+    } else if (songId === 'prayer' && prayerBg) {
+        prayerBg.classList.remove('hidden');
     }
 
     // Show start overlay and wait for user interaction

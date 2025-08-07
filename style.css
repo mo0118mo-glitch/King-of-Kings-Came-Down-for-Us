@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #000; /* Default background to black */
+    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
     overflow: hidden;
     color: #fff;
     text-align: center;
@@ -11,7 +11,6 @@ body {
     height: 100vh;
 }
 
-/* Default scene, hidden unless a specific class is on the body */
 .scene {
     position: absolute;
     top: 0;
@@ -19,18 +18,10 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    display: none; /* Hide by default */
 }
 
-/* Show the scene when its ID matches the body's class */
-body.obyeongieo-bg #background-obyeongieo,
-body.walkonwater-bg #background-walkonwater,
-body.prayer-bg #background-prayer {
-    display: block; /* Show the correct scene */
-}
-
-#background-obyeongieo {
-    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
+.scene.hidden {
+    display: none;
 }
 
 .hill {
