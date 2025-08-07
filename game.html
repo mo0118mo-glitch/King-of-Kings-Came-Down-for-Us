@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임 시작</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-header">
+        <button onclick="location.href='index.html'" data-translate-key="back">돌아가기</button>
+    </div>
+    <div id="game-screen">
+        <div class="song-select">
+            <h2 data-translate-key="song_obe">오병이어</h2>
+            <div class="difficulty">
+                <span data-translate-key="difficulty">난이도 설정:</span>
+                <button id="obyeongieo-easy" onclick="location.href='play.html?song=obyeongieo&difficulty=easy'">Easy</button>
+                <button id="obyeongieo-normal" onclick="location.href='play.html?song=obyeongieo&difficulty=normal'">Normal</button>
+                <button id="obyeongieo-hard" onclick="location.href='play.html?song=obyeongieo&difficulty=hard'">Hard</button>
+            </div>
+        </div>
+        <div id="song-miracle" class="song-select locked">
+            <h2><span class="lock-icon">🔒</span> <span data-translate-key="song_miracle">물위를 걷는 기적</span></h2>
+        </div>
+        <div id="song-prayer" class="song-select locked">
+            <h2><span class="lock-icon">🔒</span> <span data-translate-key="song_prayer">예수님의 기도</span></h2>
+        </div>
+        <div id="song-wip" class="song-select locked">
+            <h2 data-translate-key="wip_title">개발중</h2>
+        </div>
+    </div>
+    <script src="localization.js"></script>
+    <script src="game_menu.js"></script>
+</body>
+</html>

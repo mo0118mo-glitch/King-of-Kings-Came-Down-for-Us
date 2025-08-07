@@ -1,0 +1,316 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to top, #b4e197 50%, #aee1f9 100%);
+    overflow: hidden;
+    color: #fff; /* Keep old color */
+    text-align: center; /* Keep old text-align */
+    display: flex; /* Keep old display */
+    justify-content: center; /* Keep old justify-content */
+    align-items: center; /* Keep old align-items */
+    height: 100vh; /* Keep old height */
+}
+
+.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Ensure it's behind the canvas */
+}
+
+.hill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: radial-gradient(ellipse at center, #86c469 0%, #5da049 100%);
+    border-top-left-radius: 50% 20%;
+    border-top-right-radius: 50% 20%;
+}
+
+.tree {
+    position: absolute;
+    bottom: 45%;
+    left: 48%;
+    width: 150px;
+    height: 200px;
+    transform: translateX(-50%);
+}
+
+.tree .trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 20px;
+    height: 70px;
+    background: #8b5a2b;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.tree .leaves {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: 200px;
+    height: 120px;
+    background: radial-gradient(circle, #4CAF50 40%, #388E3C 100%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.rock {
+    position: absolute;
+    bottom: 38%;
+    left: 50%;
+    width: 100px;
+    height: 50px;
+    background: #888;
+    border-radius: 50% / 40%;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3);
+}
+
+.jesus {
+    position: absolute;
+    bottom: 39%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 90px;
+    background: linear-gradient(to bottom, #fff 60%, #e57373 100%);
+    border-radius: 20px;
+    z-index: 2;
+    overflow: hidden; /* To contain the arms */
+}
+
+.jesus::before {
+    content: '';
+    position: absolute;
+    top: -28px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    background: #d4a373;
+    border-radius: 50%;
+    border: 2px solid #b5651d;
+}
+
+.arm {
+    position: absolute;
+    width: 15px;
+    height: 40px;
+    background: #e57373; /* Skin color of Jesus */
+    border-radius: 5px;
+    transform-origin: top center;
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out; /* Smooth movement */
+    opacity: 0; /* Hidden by default */
+}
+
+.left-arm {
+    top: 30px;
+    left: 0;
+    transform: rotate(0deg); /* Initial position */
+}
+
+.right-arm {
+    top: 30px;
+    right: 0;
+    transform: rotate(0deg); /* Initial position */
+}
+
+/* Arm movement classes */
+.arm-left-move {
+    opacity: 1;
+    transform: rotate(-30deg) translateX(-5px); /* Example movement */
+}
+
+.arm-down-move {
+    opacity: 1;
+    transform: rotate(0deg) translateY(10px); /* Example movement */
+}
+
+.arm-up-move {
+    opacity: 1;
+    transform: rotate(0deg) translateY(-10px); /* Example movement */
+}
+
+.arm-right-move {
+    opacity: 1;
+    transform: rotate(30deg) translateX(5px); /* Example movement */
+}
+
+.disciples {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    width: 500px;
+}
+
+.disciple {
+    width: 35px;
+    height: 70px;
+    background: #f9d390;
+    border-radius: 15px;
+    position: relative;
+}
+
+.disciple::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 3px;
+    width: 30px;
+    height: 30px;
+    background: #c68b59;
+    border-radius: 50%;
+    border: 1px solid #6d4c41;
+}
+
+.crowd {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 80px;
+    background: radial-gradient(circle, rgba(80,60,30,0.3) 2px, transparent 3px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+}
+
+.sun {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #fff176 40%, #fdd835 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fff176;
+}
+
+#start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* On top of everything */
+}
+
+#start-overlay.hidden {
+    display: none;
+}
+
+#start-game-button {
+    font-size: 2em;
+    padding: 20px 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#start-game-button:hover {
+    background-color: #45a049;
+}
+
+.golden-title {
+    color: gold;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.song-select {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #fff;
+}
+
+.song-select.locked {
+    color: #888;
+    border-color: #888;
+}
+
+.difficulty span {
+    margin-right: 10px;
+}
+
+#game-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#settings-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.key-setting {
+    margin: 10px 0;
+}
+
+.key-setting input {
+    width: 80px;
+    text-align: center;
+}
+
+#health-bar-container {
+    width: 200px;
+    height: 20px;
+    border: 1px solid #fff;
+    margin: 10px auto;
+}
+
+#health-bar {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+}
+
+#game-container {
+    position: relative; /* Ensure canvas is positioned relative to this */
+}
+
+#gameCanvas {
+    background-color: transparent; /* Make canvas background transparent */
+}

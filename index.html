@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>왕중왕, 우릴위해 내려오시다.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-header" style="text-align: right; width: 100%;">
+        <button id="cheat-code-btn">코드</button>
+    </div>
+    <div id="language-selector">
+        <button id="lang-ko">한국어</button>
+        <button id="lang-en">English</button>
+    </div>
+
+    <div id="main-menu">
+        <h1 class="golden-title" data-translate-key="main_title">왕중왕, 우릴위해 내려오시다.</h1>
+        <button onclick="location.href='game.html'" data-translate-key="start_game">게임 시작</button>
+        <button onclick="location.href='story.html'" data-translate-key="game_story">게임 스토리 설정</button>
+        <button id="shop-btn" onclick="location.href='shop.html'" class="hidden">스킨 상점</button>
+        <button id="settings-btn" data-translate-key="settings">설정</button>
+    </div>
+
+    <div id="settings-modal" class="hidden">
+        <div class="modal-content">
+            <h2 data-translate-key="key_settings_title">키 설정</h2>
+            <div class="key-setting">
+                <span data-translate-key="key_left">왼쪽:</span> <input type="text" id="key-left" readonly>
+            </div>
+            <div class="key-setting">
+                <span data-translate-key="key_down">아래:</span> <input type="text" id="key-down" readonly>
+            </div>
+            <div class="key-setting">
+                <span data-translate-key="key_up">위:</span> <input type="text" id="key-up" readonly>
+            </div>
+            <div class="key-setting">
+                <span data-translate-key="key_right">오른쪽:</span> <input type="text" id="key-right" readonly>
+            </div>
+            <button id="save-keys-btn" data-translate-key="save">저장</button>
+            <button id="reset-keys-btn" data-translate-key="reset">초기화</button>
+            <button id="close-modal-btn" data-translate-key="close">닫기</button>
+        </div>
+    </div>
+
+    <script src="localization.js"></script>
+    <script src="settings.js"></script>
+    <script src="main_menu.js"></script>
+</body>
+</html>
